@@ -1,3 +1,5 @@
+import '../css/main.css';
+import '../css/input-elements.css';
 import { updateSecretParagraph } from './paragraph';
 import { updatesecretButton } from './button';
 import { secretButton } from './dom-loader';
