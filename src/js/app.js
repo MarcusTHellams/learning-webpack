@@ -1,9 +1,10 @@
-import '../css/main.css';
-import '../css/input-elements.css';
+// import '../css/main.css';
+// import '../css/input-elements.css';
 import { updateSecretParagraph } from './paragraph';
 import { updatesecretButton } from './button';
 import { secretButton } from './dom-loader';
 import { RandomGenerator } from './random-generator';
+import '../css/main.scss';
 var showSecret = false;
 
 const outputParagraph = document.querySelector('#outputParagraph');

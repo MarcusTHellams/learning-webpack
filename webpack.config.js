@@ -1,5 +1,9 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var extractTextPlugin = new ExtractTextPlugin({
+    filename: 'main.css'
+});
 
 module.exports = {
     entry: './src/js/app.js',
@@ -12,17 +16,26 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
+                test: /\.js$/,
                 use: [
-                    'style-loader',
-                    'css-loader'
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['es2015']
+                        }
+                    }
                 ]
+            },
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    use: ['css-loader', 'sass-loader']
+                })
             }
         ]
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-
-        })
+        new webpack.optimize.UglifyJsPlugin({}),
+        extractTextPlugin
     ]
 };
