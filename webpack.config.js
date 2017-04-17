@@ -7,7 +7,7 @@ var extractTextPlugin = new ExtractTextPlugin({
 
 module.exports = {
     entry: './src/js/app.js',
-    devtool: 'source-map',
+    devtool: 'cheap-eval-source-map',
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: 'bundle.js',
