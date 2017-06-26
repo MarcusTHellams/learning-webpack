@@ -2,12 +2,12 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var extractTextPlugin = new ExtractTextPlugin({
-    filename: 'main.css'
+    filename: '[name].css'
 });
 
 module.exports = {
     entry: './src/js/app.js',
-    devtool: 'cheap-eval-source-map',
+    devtool: 'inline-source-map',
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: 'bundle.js',
@@ -28,14 +28,26 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    use: ['css-loader', 'sass-loader']
+                use: extractTextPlugin.extract({
+                    use: [{
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: true
+                        }
+                    }, {
+                        loader: "sass-loader",
+                        options: {
+                            sourceMap: true
+                        }
+                    }]
                 })
             }
         ]
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({}),
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: true
+        }),
         extractTextPlugin
     ]
 };
